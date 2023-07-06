@@ -36,7 +36,7 @@ resource "aws_api_gateway_rest_api_policy" "default" {
 }
 
 resource "aws_api_gateway_resource" "default" {
-  for_each = var.resource_path
+  for_each = var.enable_resource_path ? var.resource_path : {}
 
   rest_api_id = "%{~for v in aws_api_gateway_rest_api.default~}${~v.id~}%{~endfor~}"
   parent_id   = lookup(each.value, "parent_id", "%{~for v in aws_api_gateway_rest_api.default~}${~v.root_resource_id~}%{~endfor~}")

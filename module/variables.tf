@@ -8,6 +8,11 @@ variable "enable_apigw_private" {
   type    = bool
   default = false
 }
+
+variable "enable_resource_path" {
+  type    = bool
+  default = true
+}
 ### API Gateway Model
 variable "enable_model_count" {
   type    = bool
