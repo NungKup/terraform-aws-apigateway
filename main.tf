@@ -10,7 +10,7 @@ resource "random_string" "default" {
 }
 
 resource "aws_api_gateway_rest_api" "default" {
-  for_each = var.enable_apigw ? var.apigw_name : null
+  for_each = var.enable_apigw ? var.apigw_name : {}
 
   name                     = lookup(each.value, "name_api", "${local.name_default}-api-gateway")
   description              = lookup(each.value, "description_api", "${local.description_default} create API Gateway by Terraform")
@@ -29,7 +29,7 @@ resource "aws_api_gateway_rest_api" "default" {
 
 ### Resource AWS API Gateway Policy
 resource "aws_api_gateway_rest_api_policy" "default" {
-  for_each = var.enable_apigw && var.enable_apigw_private ? var.apigw_name : null
+  for_each = var.enable_apigw && var.enable_apigw_private ? var.apigw_name : {}
 
   rest_api_id = aws_api_gateway_rest_api.default[each.key].id
   policy      = data.aws_iam_policy_document.apigw_policy[each.key].json
@@ -48,7 +48,7 @@ resource "aws_api_gateway_resource" "default" {
   ]
 }
 resource "aws_api_gateway_model" "default" {
-  for_each = var.enable_model_count ? var.resource_path : null
+  for_each = var.enable_model_count ? var.resource_path : {}
 
   rest_api_id  = "%{~for v in aws_api_gateway_rest_api.default~}${~v.id~}%{~endfor~}"
   name         = lookup(each.value, "name_model", "")
@@ -64,7 +64,7 @@ resource "aws_api_gateway_model" "default" {
 }
 
 resource "aws_api_gateway_method" "default" {
-  for_each = length(var.resource_path) > 0 ? var.resource_path : null
+  for_each = length(var.resource_path) > 0 ? var.resource_path : {}
 
   rest_api_id          = "%{~for v in aws_api_gateway_rest_api.default~}${~v.id~}%{~endfor~}"
   resource_id          = "%{~for v in aws_api_gateway_resource.default~}${~v.id~}%{~endfor~}"
@@ -85,7 +85,7 @@ resource "aws_api_gateway_method" "default" {
 }
 
 resource "aws_api_gateway_integration" "default" {
-  for_each = length(var.resource_path) > 0 ? var.resource_path : null
+  for_each = length(var.resource_path) > 0 ? var.resource_path : {}
 
   rest_api_id             = "%{~for v in aws_api_gateway_rest_api.default~}${~v.id~}%{~endfor~}"
   resource_id             = "%{~for v in aws_api_gateway_resource.default~}${~v.id~}%{~endfor~}"
@@ -113,7 +113,7 @@ resource "aws_api_gateway_integration" "default" {
 }
 
 resource "aws_api_gateway_method_response" "default" {
-  for_each = length(var.resource_path) > 0 ? var.method_response : null
+  for_each = length(var.resource_path) > 0 ? var.method_response : {}
 
   rest_api_id         = "%{~for v in aws_api_gateway_rest_api.default~}${~v.id~}%{~endfor~}"
   resource_id         = "%{~for v in aws_api_gateway_resource.default~}${~v.id~}%{~endfor~}"
@@ -132,7 +132,7 @@ resource "aws_api_gateway_method_response" "default" {
 }
 
 resource "aws_api_gateway_integration_response" "default" {
-  for_each = length(var.resource_path) > 0 ? var.method_response : null
+  for_each = length(var.resource_path) > 0 ? var.method_response : {}
 
   rest_api_id         = "%{~for v in aws_api_gateway_rest_api.default~}${~v.id~}%{~endfor~}"
   resource_id         = "%{~for v in aws_api_gateway_resource.default~}${~v.id~}%{~endfor~}"
@@ -154,7 +154,7 @@ resource "aws_api_gateway_integration_response" "default" {
 
 #------------------------------- Start Option Method ------------------------------------#
 resource "aws_api_gateway_method" "options_method" {
-  for_each = var.enable_option_method ? var.resource_path : null
+  for_each = var.enable_option_method ? var.resource_path : {}
 
   rest_api_id   = "%{~for v in aws_api_gateway_rest_api.default~}${~v.id~}%{~endfor~}"
   resource_id   = "%{~for v in aws_api_gateway_resource.default~}${~v.id~}%{~endfor~}"
@@ -163,7 +163,7 @@ resource "aws_api_gateway_method" "options_method" {
 }
 
 resource "aws_api_gateway_method_response" "options_200" {
-  for_each = var.enable_option_method ? var.resource_path : null
+  for_each = var.enable_option_method ? var.resource_path : {}
 
   rest_api_id = "%{~for v in aws_api_gateway_rest_api.default~}${~v.id~}%{~endfor~}"
   resource_id = "%{~for v in aws_api_gateway_resource.default~}${~v.id~}%{~endfor~}"
@@ -182,7 +182,7 @@ resource "aws_api_gateway_method_response" "options_200" {
 }
 
 resource "aws_api_gateway_integration" "options_integration" {
-  for_each = var.enable_option_method ? var.resource_path : null
+  for_each = var.enable_option_method ? var.resource_path : {}
 
   rest_api_id          = "%{~for v in aws_api_gateway_rest_api.default~}${~v.id~}%{~endfor~}"
   resource_id          = "%{~for v in aws_api_gateway_resource.default~}${~v.id~}%{~endfor~}"
@@ -204,7 +204,7 @@ resource "aws_api_gateway_integration" "options_integration" {
 }
 
 resource "aws_api_gateway_integration_response" "options_integration_response" {
-  for_each = var.enable_option_method ? var.resource_path : null
+  for_each = var.enable_option_method ? var.resource_path : {}
 
   rest_api_id        = "%{~for v in aws_api_gateway_rest_api.default~}${~v.id~}%{~endfor~}"
   resource_id        = "%{~for v in aws_api_gateway_resource.default~}${~v.id~}%{~endfor~}"
@@ -227,7 +227,7 @@ resource "aws_api_gateway_integration_response" "options_integration_response" {
 # Module      : Api Gateway VPC Link
 # Description : Terraform module to create Api Gateway VPC Link resource on AWS.
 resource "aws_api_gateway_vpc_link" "default" {
-  for_each = var.enable_vpc_link ? var.vpc_link : null
+  for_each = var.enable_vpc_link ? var.vpc_link : {}
 
   name        = lookup(each.value, "name_vpc_link", "${local.name_default}-vpc-link")
   description = lookup(each.value, "description_vpc_link", "${local.description_default} vpc link for API Gateway by Terraform")
@@ -238,7 +238,7 @@ resource "aws_api_gateway_vpc_link" "default" {
 # Module      : Api Gateway Api Key
 # Description : Terraform module to create Api Gateway Api Key resource on AWS.
 resource "aws_api_gateway_api_key" "default" {
-  for_each = var.enable_api_key ? var.api_key : null
+  for_each = var.enable_api_key ? var.api_key : {}
 
   name        = lookup(each.value, "name_api_key", "${local.name_default}-apikey")
   description = lookup(each.value, "description_api_key", "${local.description_default} API Key for API Gateway by Terraform")
@@ -247,7 +247,7 @@ resource "aws_api_gateway_api_key" "default" {
 }
 
 resource "aws_api_gateway_usage_plan" "default" {
-  for_each = var.enable_api_key ? var.api_key : null
+  for_each = var.enable_api_key ? var.api_key : {}
 
   name         = lookup(each.value, "name_usage_plan", "${local.name_default}-usage-plan")
   description  = lookup(each.value, "description_usage_plan", "${local.description_default} usage plan for API Gateway by Terraform")
@@ -271,7 +271,7 @@ resource "aws_api_gateway_usage_plan" "default" {
 }
 
 resource "aws_api_gateway_usage_plan_key" "default" {
-  for_each = var.enable_api_key ? var.api_key : null
+  for_each = var.enable_api_key ? var.api_key : {}
 
   key_id        = "%{~for v in aws_api_gateway_api_key.default~}${~v.id~}%{~endfor~}"
   key_type      = "API_KEY"
@@ -287,7 +287,7 @@ resource "aws_api_gateway_usage_plan_key" "default" {
 # }
 # Module      : Api Gateway Authorizer
 resource "aws_api_gateway_authorizer" "default" {
-  for_each = var.enable_authorizer ? var.authorizer : null
+  for_each = var.enable_authorizer ? var.authorizer : {}
 
   rest_api_id                      = "%{~for v in aws_api_gateway_rest_api.default~}${~v.id~}%{~endfor~}"
   name                             = lookup(each.value, "name_authorizer", "${local.name_default}-authorizer")
@@ -315,7 +315,7 @@ resource "aws_api_gateway_authorizer" "default" {
 
 #################
 resource "aws_api_gateway_deployment" "default" {
-  for_each = var.enable_apigw && var.deployment_enabled ? var.stage_deploy : null
+  for_each = var.enable_apigw && var.deployment_enabled ? var.stage_deploy : {}
 
   rest_api_id       = "%{~for v in aws_api_gateway_rest_api.default~}${~v.id~}%{~endfor~}"
   stage_name        = lookup(each.value, "stage_name", "")
@@ -326,7 +326,7 @@ resource "aws_api_gateway_deployment" "default" {
 }
 # # # Resource AWS Api Gateway Stage
 resource "aws_api_gateway_stage" "stage_name" {
-  for_each = var.enable_apigw && var.deployment_enabled ? var.stage_deploy : null
+  for_each = var.enable_apigw && var.deployment_enabled ? var.stage_deploy : {}
 
   rest_api_id           = "%{~for v in aws_api_gateway_rest_api.default~}${~v.id~}%{~endfor~}"
   deployment_id         = "%{~for v in aws_api_gateway_deployment.default~}${~v.id~}%{~endfor~}"
