@@ -21,7 +21,7 @@ resource "aws_api_gateway_rest_api" "default" {
     for_each = var.apigw_name
     content {
       types            = lookup(each.value, "types", ["PRIVATE"])
-      vpc_endpoint_ids = [each.value.types == ["PRIVATE"] ? data.aws_vpc_endpoint.api[each.key].id : null]
+      vpc_endpoint_ids = endpoint_configuration.value.types == ["PRIVATE"] ? [data.aws_vpc_endpoint.api[each.key].id] : null
     }
   }
   tags = { Name = lookup(each.value, "name_api", "${local.name_default}-api-gateway") }
