@@ -15,3 +15,7 @@ variable "api_id" {
 variable "api_parend_id" {
   type = string
 }
+variable "enable_parent" {
+  type    = bool
+  default = false
+}

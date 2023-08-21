@@ -5,6 +5,13 @@ resource "aws_api_gateway_resource" "default" {
   parent_id   = lookup(each.value, "parent_id", var.api_parend_id)
   path_part   = lookup(each.value, "path_part", "")
 }
+resource "aws_api_gateway_resource" "parent_id" {
+  for_each = var.enable_parent ? var.resource_config : {}
+
+  rest_api_id = lookup(each.value, "rest_api_id", var.api_id)
+  parent_id   = aws_api_gateway_resource.default[each.value.parent_id].id
+  path_part   = lookup(each.value, "path_part", "")
+}
 
 resource "aws_api_gateway_model" "default" {
   for_each = var.enable_model_count ? var.resource_config : {}

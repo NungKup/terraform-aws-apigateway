@@ -46,3 +46,7 @@ variable "enable_model_count" {
   type    = bool
   default = false
 }
+variable "enable_parent" {
+  type    = bool
+  default = false
+}
