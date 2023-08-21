@@ -11,5 +11,5 @@ output "api_arn" {
 }
 
 output "api_vpc_link" {
-  value = aws_api_gateway_vpc_link.default.id
+  value = aws_api_gateway_vpc_link.default[*].id
 }
