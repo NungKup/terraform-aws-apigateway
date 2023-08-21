@@ -17,9 +17,10 @@ module "reat_api" {
 module "resource" {
   source = "./module/resource"
 
-  api_id             = module.reat_api.api_id
-  api_parend_id      = module.reat_api.api_root_resource_id
-  resource_config    = var.resource_config
-  enable_parent      = var.enable_parent
-  enable_model_count = var.enable_model_count
+  api_id                 = module.reat_api.api_id
+  api_parend_id          = module.reat_api.api_root_resource_id
+  resource_config        = var.resource_config
+  resource_parent_config = var.resource_parent_config
+  enable_parent          = var.enable_parent
+  enable_model_count     = var.enable_model_count
 }
