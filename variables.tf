@@ -38,23 +38,23 @@ variable "vpc_link_description" {
   type    = string
   default = null
 }
-variable "resource" {
+# variable "resource" {
+#   type    = any
+#   default = {}
+# }
+variable "resource_config" {
   type    = any
   default = {}
 }
-# variable "resource_config" {
-#   type    = any
-#   default = {}
-# }
-# variable "resource_parent_config" {
-#   type    = any
-#   default = {}
-# }
-# variable "enable_model_count" {
-#   type    = bool
-#   default = false
-# }
-# variable "enable_parent" {
-#   type    = bool
-#   default = false
-# }
+variable "resource_parent_config" {
+  type    = any
+  default = {}
+}
+variable "enable_model_count" {
+  type    = bool
+  default = false
+}
+variable "enable_parent" {
+  type    = bool
+  default = false
+}
