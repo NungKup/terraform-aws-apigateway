@@ -17,7 +17,7 @@ resource "aws_api_gateway_resource" "parent_id" {
 }
 
 resource "aws_api_gateway_model" "default" {
-  for_each = var.enable_model_count ? var.model_config : null
+  for_each = var.enable_model_count ? var.model_config : {}
 
   rest_api_id  = lookup(each.value, "rest_api_id", var.api_id)
   name         = lookup(each.value, "name_model", "")
