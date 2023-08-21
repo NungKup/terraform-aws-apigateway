@@ -45,7 +45,7 @@ variable "vpc_link_description" {
 # variable "resource_parent_config" {
 #   type    = any
 #   default = {}
-}
+# }
 # variable "enable_model_count" {
 #   type    = bool
 #   default = false
