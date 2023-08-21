@@ -30,3 +30,7 @@ variable "vpc_link" {
   type    = string
   default = null
 }
+variable "model_config" {
+  type    = any
+  default = {}
+}
