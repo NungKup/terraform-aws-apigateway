@@ -23,4 +23,6 @@ module "resource" {
   resource_parent_config = var.resource_parent_config
   enable_parent          = var.enable_parent
   enable_model_count     = var.enable_model_count
+
+  depends_on = [module.reat_api]
 }
