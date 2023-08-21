@@ -62,3 +62,9 @@ variable "enable_resource" {
   type    = bool
   default = false
 }
+variable "deploy" {
+  default = {}
+}
+variable "stage" {
+  default = {}
+}
