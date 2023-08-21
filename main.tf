@@ -32,3 +32,13 @@ module "resource" {
 
   depends_on = [module.reat_api]
 }
+
+module "deploy_api" {
+  source = "./module/deployment"
+
+  api_id = module.reat_api.api_id
+  deploy = var.deploy
+  stage  = var.stage
+
+  depends_on = [module.resource]
+}
