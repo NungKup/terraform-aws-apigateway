@@ -30,7 +30,7 @@ resource "aws_api_gateway_model" "default" {
 module "medthod" {
   source = "../medthod"
 
-  for_each = var.resource_config.enable_resource ? var.resource_config : {}
+  for_each = { for k, v in var.resource_config : k => v }
 
   api_id      = var.api_id
   resource_id = aws_api_gateway_resource.default[each.key].id
