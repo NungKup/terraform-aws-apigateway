@@ -1,5 +1,6 @@
 resource "aws_api_gateway_method" "default" {
-  # count                = var.enable_resource ? 1 : 0
+  count = var.enable_resource ? 1 : 0
+
   rest_api_id          = var.api_id
   resource_id          = var.resource_id
   http_method          = var.http_method          # ""
@@ -13,7 +14,8 @@ resource "aws_api_gateway_method" "default" {
 }
 
 resource "aws_api_gateway_integration" "default" {
-  # count                   = var.enable_resource ? 1 : 0
+  count = var.enable_resource ? 1 : 0
+
   rest_api_id             = var.api_id
   resource_id             = var.resource_id
   http_method             = var.http_method                 #""
@@ -33,7 +35,8 @@ resource "aws_api_gateway_integration" "default" {
 }
 
 resource "aws_api_gateway_method_response" "default" {
-  # count               = var.enable_resource ? 1 : 0
+  count = var.enable_resource ? 1 : 0
+
   rest_api_id         = var.api_id
   resource_id         = var.resource_id
   http_method         = aws_api_gateway_method.default.http_method
@@ -43,10 +46,10 @@ resource "aws_api_gateway_method_response" "default" {
 }
 
 resource "aws_api_gateway_integration_response" "default" {
-  # count       = var.enable_resource ? 1 : 0
-  rest_api_id = var.api_id
-  resource_id = var.resource_id
+  count = var.enable_resource ? 1 : 0
 
+  rest_api_id         = var.api_id
+  resource_id         = var.resource_id
   http_method         = aws_api_gateway_method.default.http_method
   status_code         = var.status_code                     #", null)
   selection_pattern   = var.selection_pattern               #", null)
