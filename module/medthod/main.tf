@@ -58,6 +58,57 @@ resource "aws_api_gateway_integration_response" "default" {
   content_handling    = var.integration_content_handling    #", null)                          #"%{~for i, v in each.value.integration_content_handling~}${~v~}%{~if i < length(v)~}v%{~else~}null%{~endif~}%{~endfor~}"
 }
 
+## Enable Status Code 400 And 500
+# Response 400 -------
+resource "aws_api_gateway_method_response" "method_response_400" {
+  count = var.enable_resource && var.enable_status_400_500 ? 1 : 0
+
+  rest_api_id         = var.api_id
+  resource_id         = var.resource_id
+  http_method         = aws_api_gateway_method.default[count.index].http_method
+  status_code         = "400"
+  response_models     = var.method_response_models_400 #", {})     #"%{~for i, v in each.value.method_response_models~}${~v~}%{~if i < length(v)~}v%{~else~}{}%{~endif~}%{~endfor~}"     #
+  response_parameters = var.method_response_parameters_400
+}
+
+resource "aws_api_gateway_integration_response" "isearch_integration_400" {
+  count = var.enable_resource && var.enable_status_400_500 ? 1 : 0
+
+  rest_api_id         = var.api_id
+  resource_id         = var.resource_id
+  http_method         = aws_api_gateway_method.default[count.index].http_method
+  status_code         = "400"
+  selection_pattern   = var.selection_pattern_400
+  response_parameters = var.integration_response_parameters_400
+  response_templates  = var.integration_response_templates_400
+  content_handling    = var.integration_content_handling_400
+}
+
+# Response 500 -------
+resource "aws_api_gateway_method_response" "method_response_500" {
+  count = var.enable_resource && var.enable_status_400_500 ? 1 : 0
+
+  rest_api_id         = var.api_id
+  resource_id         = var.resource_id
+  http_method         = aws_api_gateway_method.default[count.index].http_method
+  status_code         = "500"
+  response_models     = var.method_response_models_500 #", {})     #"%{~for i, v in each.value.method_response_models~}${~v~}%{~if i < length(v)~}v%{~else~}{}%{~endif~}%{~endfor~}"     #
+  response_parameters = var.method_response_parameters_500
+}
+
+resource "aws_api_gateway_integration_response" "isearch_integration_500" {
+  count = var.enable_resource && var.enable_status_400_500 ? 1 : 0
+
+  rest_api_id         = var.api_id
+  resource_id         = var.resource_id
+  http_method         = aws_api_gateway_method.default[count.index].http_method
+  status_code         = "500"
+  selection_pattern   = var.selection_pattern_500
+  response_parameters = var.integration_response_parameters_500
+  response_templates  = var.integration_response_templates_500
+  content_handling    = var.integration_content_handling_500
+}
+
 ### !!!! Option !!!!
 # resource "aws_api_gateway_method" "options_method" {
 #   for_each = var.enable_option_method ? var.request_config : {}

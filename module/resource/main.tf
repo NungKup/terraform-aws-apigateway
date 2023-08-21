@@ -67,6 +67,24 @@ module "medthod" {
   integration_response_parameters = lookup(each.value, "integration_response_parameters", {})
   integration_response_templates  = lookup(each.value, "integration_response_templates", { "application/json" = "" })
 
+  enable_status_400_500 = lookup(each.value, "enable_status_400_500", false)
+
+  method_response_models_400     = lookup(each.value, "method_response_model_400", {})
+  method_response_parameters_400 = lookup(each.value, "method_response_parameters_400", {})
+
+  method_response_models_500     = lookup(each.value, "method_response_models_500", {})
+  method_response_parameters_500 = lookup(each.value, "method_response_parameters_500", {})
+
+  selection_pattern_400               = lookup(each.value, "selection_pattern_400", null)
+  integration_response_parameters_400 = lookup(each.value, "integration_response_parameters_400", {})
+  integration_response_templates_400  = lookup(each.value, "integration_response_templates_400", { "application/json" = "" })
+  integration_content_handling_400    = lookup(each.value, "integration_content_handling_400", null)
+
+  selection_pattern_500               = lookup(each.value, "selection_pattern_500", null)
+  integration_response_parameters_500 = lookup(each.value, "integration_response_parameters_500", {})
+  integration_response_templates_500  = lookup(each.value, "integration_response_templates_500", { "application/json" = "" })
+  integration_content_handling_500    = lookup(each.value, "integration_content_handling_500", null)
+
   vpc_link = var.vpc_link
 
   depends_on = [aws_api_gateway_resource.default]

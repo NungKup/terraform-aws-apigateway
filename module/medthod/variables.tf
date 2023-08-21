@@ -44,7 +44,26 @@ variable "enable_resource" {
   type    = bool
   default = false
 }
-# variable "integration_content_handling" { default = null }
+
+variable "enable_status_400_500" {
+  type    = bool
+  default = false
+}
+variable "method_response_models_400" { default = {} }
+variable "method_response_parameters_400" { default = {} }
+variable "method_response_models_500" { default = {} }
+variable "method_response_parameters_500" { default = {} }
+
+variable "selection_pattern_400" { default = null }
+variable "integration_response_parameters_400" { default = { "application/json" = "" } }
+variable "integration_response_templates_400" { default = {} }
+variable "integration_content_handling_400" { default = null }
+
+variable "selection_pattern_500" { default = null }
+variable "integration_response_parameters_500" { default = { "application/json" = "" } }
+variable "integration_response_templates_500" { default = {} }
+variable "integration_content_handling_500" { default = null }
+
 
 # http_method
 # authorization
