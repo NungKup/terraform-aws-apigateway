@@ -17,12 +17,17 @@ module "reat_api" {
 module "resource" {
   source = "./module/resource"
 
+  for_each = { for k, v in var.resource : k => v }
+
   api_id                 = module.reat_api.api_id
   api_parend_id          = module.reat_api.api_root_resource_id
-  resource_config        = var.resource_config
-  resource_parent_config = var.resource_parent_config
-  enable_parent          = var.enable_parent
-  enable_model_count     = var.enable_model_count
+  resource_config        = try(each.value.resource_config, {})        # var.resource_config
+  resource_parent_config = try(each.value.resource_parent_config, {}) # var.resource_parent_config
+  enable_parent          = try(each.value.enable_parent, false)       # var.enable_parent
+  enable_model_count     = try(each.value.enable_model_count, false)  # var.enable_model_count
+
+  request_config  = try(each.value.request_config, {})
+  response_config = try(each.value.response_config, {})
 
   depends_on = [module.reat_api]
 }
