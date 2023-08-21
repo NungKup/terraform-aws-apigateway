@@ -16,6 +16,10 @@ variable "api_key_source" {
   type    = string
   default = "HEADER"
 }
+variable "endpoint_configuration" {
+  type    = any
+  default = {}
+}
 variable "vpc_id" {
   type = string
 }

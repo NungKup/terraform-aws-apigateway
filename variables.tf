@@ -1,91 +1,25 @@
-### API Gateway Rest API
-variable "enable_apigw" {
-  description = "Controls if API Gateway should be created"
-  type        = bool
-  default     = true
-}
-variable "enable_apigw_private" {
-  type    = bool
-  default = false
-}
-
-variable "enable_resource_path" {
+variable "enable_private_api" {
   type    = bool
   default = true
 }
-### API Gateway Model
-variable "enable_model_count" {
-  type    = bool
-  default = false
+variable "name" {
+  type = string
 }
-### API Gateway Option Method
-variable "enable_option_method" {
-  type    = bool
-  default = false
-}
-### API Gateway VPC Link
-variable "enable_vpc_link" {
-  type    = bool
-  default = false
-}
-### API Gateway Api Key
-variable "enable_api_key" {
-  type    = bool
-  default = false
-}
-### API Gateway authorizer
-variable "enable_authorizer" {
-  type    = bool
-  default = false
-}
-## API Gateway deployment_enabled
-variable "deployment_enabled" {
-  type    = bool
-  default = false
-}
-## enable_access_log_setting
-variable "enable_access_log_setting" {
-  type    = bool
-  default = false
-}
-
-variable "vpc_id" {
+variable "description" {
   type    = string
-  default = ""
+  default = null
 }
-variable "apigw_name" {
+variable "minimum_compression_size" {
+  default = -1
+}
+variable "api_key_source" {
+  type    = string
+  default = "HEADER"
+}
+variable "endpoint_configuration" {
   type    = any
   default = {}
 }
-variable "resource_path" {
-  type    = any
-  default = {}
-}
-variable "method_response" {
-  type    = any
-  default = {}
-}
-# variable "config_model" {
-#   type    = any
-#   default = {}
-# }
-variable "stage_deploy" {
-  type    = any
-  default = {}
-}
-variable "vpc_link" {
-  type    = any
-  default = {}
-}
-variable "api_key" {
-  type    = any
-  default = {}
-}
-variable "authorizer" {
-  type    = any
-  default = {}
-}
-variable "access_log_settings" {
-  type    = any
-  default = {}
+variable "vpc_id" {
+  type = string
 }
