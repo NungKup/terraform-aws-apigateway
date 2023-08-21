@@ -9,7 +9,7 @@ resource "aws_api_gateway_resource" "parent_id" {
   for_each = var.enable_parent ? var.resource_config : {}
 
   rest_api_id = lookup(each.value, "rest_api_id", var.api_id)
-  parent_id   = aws_api_gateway_resource.default[each.value.parent_id].id
+  parent_id   = aws_api_gateway_resource.default[lookup(each.value, "parent_id", "")].id
   path_part   = lookup(each.value, "path_part", "")
 }
 
