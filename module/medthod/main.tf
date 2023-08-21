@@ -22,7 +22,7 @@ resource "aws_api_gateway_integration" "default" {
   integration_http_method = lookup(each.value, "integration_http_method", null)
   type                    = lookup(each.value, "integration_type", "AWS_PROXY")
   connection_type         = lookup(each.value, "integration_connection_type", "INTERNET")
-  connection_id           = each.value.integration_connection_type == "VPC_LINK" ? each.value.connection_id : ""
+  connection_id           = each.value.integration_connection_type == "VPC_LINK" ? var.vpc_link : ""
   uri                     = lookup(each.value, "integration_uri", "")
   credentials             = lookup(each.value, "integration_credentials", "")
   request_parameters      = lookup(each.value, "integration_request_parameters", {})

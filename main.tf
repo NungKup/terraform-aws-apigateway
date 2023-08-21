@@ -24,6 +24,8 @@ module "resource" {
   enable_parent          = var.enable_parent
   enable_model_count     = var.enable_model_count
 
+  vpc_link = module.reat_api.api_vpc_link[0]
+
   # request_config  = try(each.value.request_config, {})
   # response_config = try(each.value.response_config, {})
 

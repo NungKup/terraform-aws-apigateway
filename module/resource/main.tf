@@ -38,8 +38,8 @@ module "medthod" {
   enable_resource = lookup(each.value, "enable_resource", false)
   request_config  = lookup(each.value, "request_config", {})  #var.request_config
   response_config = lookup(each.value, "response_config", {}) #var.response_config
-
-  depends_on = [aws_api_gateway_resource.default]
+  vpc_link        = var.vpc_link
+  depends_on      = [aws_api_gateway_resource.default]
 }
 
 # module "medthod_parent" {

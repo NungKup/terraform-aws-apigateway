@@ -22,3 +22,7 @@ variable "enable_parent" {
   type    = bool
   default = false
 }
+variable "vpc_link" {
+  type    = string
+  default = null
+}

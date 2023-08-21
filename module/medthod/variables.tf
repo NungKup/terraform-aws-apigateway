@@ -21,4 +21,7 @@ variable "api_id" {
 variable "resource_id" {
   type = string
 }
-
+variable "vpc_link" {
+  type    = string
+  default = null
+}
