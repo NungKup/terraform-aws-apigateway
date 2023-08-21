@@ -26,8 +26,8 @@ module "resource" {
   enable_parent          = try(each.value.enable_parent, false)       # var.enable_parent
   enable_model_count     = try(each.value.enable_model_count, false)  # var.enable_model_count
 
-  request_config  = try(each.value.request_config, {})
-  response_config = try(each.value.response_config, {})
+  # request_config  = try(each.value.request_config, {})
+  # response_config = try(each.value.response_config, {})
 
   depends_on = [module.reat_api]
 }
