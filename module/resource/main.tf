@@ -33,7 +33,7 @@ module "medthod" {
   for_each = var.resource_config
 
   api_id      = var.api_id
-  resource_id = aws_api_gateway_resource.default[each.key].id[0]
+  resource_id = "%{~for v in aws_api_gateway_resource.default~}${~v.id~}%{~endfor~}" #aws_api_gateway_resource.default[each.key].id
 
   http_method          = lookup(each.value, "http_method", "")
   authorization        = lookup(each.value, "authorization", "NONE")
@@ -53,7 +53,7 @@ module "medthod" {
   integration_request_templates    = lookup(each.value, "integration_request_templates", {})
   integration_passthrough_behavior = lookup(each.value, "integration_passthrough_behavior", null)
   integration_cache_key_parameters = lookup(each.value, "integration_cache_key_parameters", [])
-  integration_cache_namespace      = lookup(each.value, "integration_cache_namespace", aws_api_gateway_resource.default[each.key].id[0])
+  integration_cache_namespace      = lookup(each.value, "integration_cache_namespace", "%{~for v in aws_api_gateway_resource.default~}${~v.id~}%{~endfor~}")
   integration_content_handling     = lookup(each.value, "integration_content_handling", null)
   integration_timeout_milliseconds = lookup(each.value, "integration_timeout_milliseconds", 9000)
 
