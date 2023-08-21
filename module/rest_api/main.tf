@@ -57,3 +57,11 @@ data "aws_iam_policy_document" "apigw_policy" {
     resources = ["*"]
   }
 }
+
+resource "aws_api_gateway_vpc_link" "default" {
+  count = var.enable_vpc_link ? 1 : 0
+
+  name        = var.vpc_link_name
+  description = var.vpc_link_description
+  target_arns = var.nlb_target_arn
+}
