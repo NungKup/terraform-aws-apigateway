@@ -2,8 +2,12 @@ variable "request_config" {
   type    = any
   default = {}
 }
+variable "response_config" {
+  type    = any
+  default = {}
+}
 variable "enable_resource" {
-  type = bool
+  type    = bool
   default = false
 }
 
