@@ -39,7 +39,7 @@ resource "aws_api_gateway_method_response" "default" {
 
   rest_api_id         = var.api_id
   resource_id         = var.resource_id
-  http_method         = aws_api_gateway_method.default.http_method
+  http_method         = aws_api_gateway_method.default[count.index].http_method
   status_code         = var.status_code                #", null)              #"%{~for i, v in each.value.status_code~}${~v~}%{~if i < length(v)~}v%{~else~}200%{~endif~}%{~endfor~}" # Terraform Status 200,400,500
   response_models     = var.method_response_models     #", {})     #"%{~for i, v in each.value.method_response_models~}${~v~}%{~if i < length(v)~}v%{~else~}{}%{~endif~}%{~endfor~}"     #
   response_parameters = var.method_response_parameters #", {} #"%{~for i, v in each.value.method_response_parameters~}${~v~}%{~if i < length(v)~}v%{~else~}{}%{~endif~}%{~endfor~}" #
@@ -50,7 +50,7 @@ resource "aws_api_gateway_integration_response" "default" {
 
   rest_api_id         = var.api_id
   resource_id         = var.resource_id
-  http_method         = aws_api_gateway_method.default.http_method
+  http_method         = aws_api_gateway_method.default[count.index].http_method
   status_code         = var.status_code                     #", null)
   selection_pattern   = var.selection_pattern               #", null)
   response_parameters = var.integration_response_parameters #", {})                         #"%{~for i, v in each.value.integration_response_parameters~}${~v~}%{~if i < length(v)~}v%{~else~}{}%{~endif~}%{~endfor~}"
