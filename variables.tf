@@ -58,10 +58,10 @@ variable "enable_parent" {
   type    = bool
   default = false
 }
-variable "enable_resource" {
-  type    = bool
-  default = false
-}
+# variable "enable_resource" {
+#   type    = bool
+#   default = false
+# }
 variable "deploy" {
   default = {}
 }

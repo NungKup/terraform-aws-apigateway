@@ -23,7 +23,7 @@ module "resource" {
   resource_parent_config = var.resource_parent_config
   enable_parent          = var.enable_parent
   enable_model_count     = var.enable_model_count
-  enable_resource        = var.enable_resource
+  # enable_resource        = var.enable_resource
 
   vpc_link = module.reat_api.api_vpc_link[0]
 
