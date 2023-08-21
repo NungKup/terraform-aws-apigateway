@@ -11,6 +11,3 @@ output "api_arn" {
 output "api_resource_id" {
   value = module.resource.api_resource_id
 }
-output "api_resource_path" {
-  value = module.resource.api_resource_path
-}
