@@ -7,8 +7,8 @@ variable "response_config" {
   default = {}
 }
 variable "enable_resource" {
-  type    = bool
-  default = false
+  type = bool
+  # default = false
 }
 
 variable "api_authorizer_id" {
