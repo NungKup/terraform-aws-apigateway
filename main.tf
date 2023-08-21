@@ -14,6 +14,9 @@ module "reat_api" {
   nlb_target_arn       = var.nlb_target_arn
 }
 
-# module "resource" {
+module "resource" {
+  source = "./module/resource"
 
-# }
+  resource_config    = var.resource_config
+  enable_model_count = var.enable_model_count
+}
