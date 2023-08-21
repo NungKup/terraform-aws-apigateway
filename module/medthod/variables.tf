@@ -40,6 +40,10 @@ variable "method_response_parameters" { default = {} }
 variable "selection_pattern" { default = null }
 variable "integration_response_parameters" { default = { "application/json" = "" } }
 variable "integration_response_templates" { default = {} }
+variable "enable_resource" {
+  type=bool
+  default = false
+}
 # variable "integration_content_handling" { default = null }
 
 # http_method
