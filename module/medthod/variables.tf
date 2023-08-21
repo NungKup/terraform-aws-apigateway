@@ -38,7 +38,7 @@ variable "method_response_models" { default = {} }
 variable "method_response_parameters" { default = {} }
 
 variable "selection_pattern" { default = null }
-variable "integration_response_parameters" { default = {} }
+variable "integration_response_parameters" { default = { "application/json" = "" } }
 variable "integration_response_templates" { default = {} }
 # variable "integration_content_handling" { default = null }
 
