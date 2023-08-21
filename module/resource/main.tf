@@ -27,27 +27,31 @@ resource "aws_api_gateway_model" "default" {
   schema = lookup(each.value, "model_schemas", jsonencode({ type = "object" }))
 }
 
-# module "medthod" {
-#   source = "../medthod"
+module "medthod" {
+  source = "../medthod"
 
-#   for_each = var.resource_config
+  for_each = var.resource_config
 
-#   api_id      = var.api_id
-#   resource_id = aws_api_gateway_resource.default[each.key].id
+  api_id      = var.api_id
+  resource_id = aws_api_gateway_resource.default[each.key].id
 
-#   request_config  = var.request_config
-#   response_config = var.response_config
+  enable_resource = lookup(each.value, "enable_resource", false)
+  request_config  = lookup(each.value, "request_config", {})  #var.request_config
+  response_config = lookup(each.value, "response_config", {}) #var.response_config
 
-#   depends_on = [aws_api_gateway_resource.default]
-# }
+  depends_on = [aws_api_gateway_resource.default]
+}
 
 # module "medthod_parent" {
 #   source = "../medthod"
 
-#   for_each = var.resource_parent_config
+#   for_each = var.enable_parent ? var.resource_parent_config : {}
 
 #   api_id      = var.api_id
 #   resource_id = aws_api_gateway_resource.parent_id[each.key].id
+
+# request_config  = lookup(each.value, "request_config", {})  #var.request_config
+#   response_config = lookup(each.value, "response_config", {}) #var.response_config
 
 #   depends_on = [aws_api_gateway_resource.default]
 # }

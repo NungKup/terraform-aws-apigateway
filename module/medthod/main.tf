@@ -1,5 +1,5 @@
 resource "aws_api_gateway_method" "default" {
-  for_each = var.request_config
+  for_each = var.enable_resource ? var.request_config : {}
 
   rest_api_id          = lookup(each.value, "rest_api_id", var.api_id)
   resource_id          = lookup(each.value, "resource_id", var.resource_id)
@@ -14,7 +14,7 @@ resource "aws_api_gateway_method" "default" {
 }
 
 resource "aws_api_gateway_integration" "default" {
-  for_each = var.request_config
+  for_each = var.enable_resource ? var.request_config : {}
 
   rest_api_id             = lookup(each.value, "rest_api_id", var.api_id)
   resource_id             = lookup(each.value, "resource_id", var.resource_id)
@@ -35,7 +35,7 @@ resource "aws_api_gateway_integration" "default" {
 }
 
 resource "aws_api_gateway_method_response" "default" {
-  for_each = var.response_config
+  for_each = var.enable_resource ? var.response_config : {}
 
   rest_api_id         = lookup(each.value, "rest_api_id", var.api_id)
   resource_id         = lookup(each.value, "resource_id", var.resource_id)
@@ -46,7 +46,7 @@ resource "aws_api_gateway_method_response" "default" {
 }
 
 resource "aws_api_gateway_integration_response" "default" {
-  for_each = var.response_config
+  for_each = var.enable_resource ? var.response_config : {}
 
   rest_api_id         = lookup(each.value, "rest_api_id", var.api_id)
   resource_id         = lookup(each.value, "resource_id", var.resource_id)
