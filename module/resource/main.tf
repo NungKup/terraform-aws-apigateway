@@ -37,7 +37,7 @@ module "medthod" {
 
   http_method          = lookup(each.value, "http_method", "")
   authorization        = lookup(each.value, "authorization", "NONE")
-  authorizer_id        = lookup(each.value, "authorizer_id", null)
+  api_authorizer_id    = lookup(each.value, "authorizer_id", null)
   authorization_scopes = lookup(each.value, "authorization_scopes", null)
   api_key_required     = lookup(each.value, "api_key_required", null)
   request_models       = lookup(each.value, "request_models", { "application/json" = "Empty" })
