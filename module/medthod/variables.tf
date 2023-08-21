@@ -21,7 +21,7 @@ variable "request_validator_id" { default = null }
 variable "request_parameters" { default = {} }
 
 variable "integration_http_method" { default = "" }
-variable "integration_type" { defaut = "AWS_PROXY" }
+variable "integration_type" { default = "AWS_PROXY" }
 variable "integration_connection_type" { default = "INTERNET" }
 variable "integration_uri" { default = "" }
 variable "integration_credentials" { default = "" }
@@ -40,7 +40,7 @@ variable "method_response_parameters" { default = {} }
 variable "selection_pattern" { default = null }
 variable "integration_response_parameters" { default = {} }
 variable "integration_response_templates" { default = {} }
-variable "integration_content_handling" { default = null }
+# variable "integration_content_handling" { default = null }
 
 # http_method
 # authorization
