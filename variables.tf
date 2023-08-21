@@ -38,6 +38,10 @@ variable "vpc_link_description" {
   type    = string
   default = null
 }
+variable "resource" {
+  type    = any
+  default = {}
+}
 # variable "resource_config" {
 #   type    = any
 #   default = {}
