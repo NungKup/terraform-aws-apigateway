@@ -40,7 +40,7 @@ resource "aws_api_gateway_method_response" "default" {
   rest_api_id         = lookup(each.value, "rest_api_id", var.api_id)
   resource_id         = lookup(each.value, "resource_id", var.resource_id)
   http_method         = aws_api_gateway_method.default[var.request_config.key].http_method
-  status_code         = lookup(each.value, "status_code", {})                #"%{~for i, v in each.value.status_code~}${~v~}%{~if i < length(v)~}v%{~else~}200%{~endif~}%{~endfor~}" # Terraform Status 200,400,500
+  status_code         = lookup(each.value, "status_code", null)              #"%{~for i, v in each.value.status_code~}${~v~}%{~if i < length(v)~}v%{~else~}200%{~endif~}%{~endfor~}" # Terraform Status 200,400,500
   response_models     = lookup(each.value, "method_response_models", {})     #"%{~for i, v in each.value.method_response_models~}${~v~}%{~if i < length(v)~}v%{~else~}{}%{~endif~}%{~endfor~}"     #
   response_parameters = lookup(each.value, "method_response_parameters", {}) #"%{~for i, v in each.value.method_response_parameters~}${~v~}%{~if i < length(v)~}v%{~else~}{}%{~endif~}%{~endfor~}" #
 }
@@ -51,11 +51,11 @@ resource "aws_api_gateway_integration_response" "default" {
   rest_api_id         = lookup(each.value, "rest_api_id", var.api_id)
   resource_id         = lookup(each.value, "resource_id", var.resource_id)
   http_method         = aws_api_gateway_method.default[var.request_config.key].http_method
-  status_code         = lookup(each.value, "status_code", {})
+  status_code         = lookup(each.value, "status_code", null)
   selection_pattern   = lookup(each.value, "selection_pattern", null)
-  response_parameters = lookup(each.value, "integration_response_parameters", {}) #"%{~for i, v in each.value.integration_response_parameters~}${~v~}%{~if i < length(v)~}v%{~else~}{}%{~endif~}%{~endfor~}"
-  response_templates  = lookup(each.value, "integration_response_templates", {})  #"%{~for i, v in each.value.integration_response_templates~}${~v~}%{~if i < length(v)~}v%{~else~}{}%{~endif~}%{~endfor~}"
-  content_handling    = lookup(each.value, "integration_content_handling", null)  #"%{~for i, v in each.value.integration_content_handling~}${~v~}%{~if i < length(v)~}v%{~else~}null%{~endif~}%{~endfor~}"
+  response_parameters = lookup(each.value, "integration_response_parameters", {})                         #"%{~for i, v in each.value.integration_response_parameters~}${~v~}%{~if i < length(v)~}v%{~else~}{}%{~endif~}%{~endfor~}"
+  response_templates  = lookup(each.value, "integration_response_templates", { "application/json" = "" }) #"%{~for i, v in each.value.integration_response_templates~}${~v~}%{~if i < length(v)~}v%{~else~}{}%{~endif~}%{~endfor~}"
+  content_handling    = lookup(each.value, "integration_content_handling", null)                          #"%{~for i, v in each.value.integration_content_handling~}${~v~}%{~if i < length(v)~}v%{~else~}null%{~endif~}%{~endfor~}"
 }
 
 ### !!!! Option !!!!
