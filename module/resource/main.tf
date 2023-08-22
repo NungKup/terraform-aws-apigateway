@@ -159,7 +159,7 @@ module "medthod_double" {
   for_each = { for k, v in var.resource_double_medthod : k => v if var.enable_create_double_medthod }
 
   api_id      = var.api_id
-  resource_id = aws_api_gateway_resource.parent_id[lookup(each.value, "parent_id", "")].id
+  resource_id = aws_api_gateway_resource.default[lookup(each.value, "parent_id", "")].id
 
   enable_resource = lookup(each.value, "enable_resource", false)
 
