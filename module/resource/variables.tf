@@ -34,3 +34,12 @@ variable "model_config" {
   type    = any
   default = {}
 }
+
+variable "enable_create_double_medthod" {
+  type    = bool
+  default = false
+}
+variable "resource_double_medthod" {
+  type    = any
+  default = {}
+}

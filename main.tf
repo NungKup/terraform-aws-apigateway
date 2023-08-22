@@ -24,6 +24,8 @@ module "resource" {
   enable_parent          = var.enable_parent
   enable_model_count     = var.enable_model_count
   # enable_resource        = var.enable_resource
+  enable_create_double_medthod = var.enable_create_double_medthod
+  resource_double_medthod      = var.resource_double_medthod
 
   vpc_link = module.reat_api.api_vpc_link[0]
 

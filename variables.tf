@@ -68,3 +68,11 @@ variable "deploy" {
 variable "stage" {
   default = {}
 }
+variable "enable_create_double_medthod" {
+  type    = bool
+  default = false
+}
+variable "resource_double_medthod" {
+  type    = any
+  default = {}
+}
