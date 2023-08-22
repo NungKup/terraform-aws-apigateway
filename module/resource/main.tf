@@ -85,7 +85,7 @@ module "medthod" {
   integration_response_templates_500  = lookup(each.value, "integration_response_templates_500", { "application/json" = "" })
   integration_content_handling_500    = lookup(each.value, "integration_content_handling_500", null)
 
-  vpc_link = var.vpc_link
+  vpc_link = lookup(each.value, "vpc_link", var.vpc_link)
 
   depends_on = [aws_api_gateway_resource.default]
 }
@@ -148,7 +148,7 @@ module "medthod_parent" {
   integration_response_templates_500  = lookup(each.value, "integration_response_templates_500", { "application/json" = "" })
   integration_content_handling_500    = lookup(each.value, "integration_content_handling_500", null)
 
-  vpc_link = var.vpc_link
+  vpc_link = lookup(each.value, "vpc_link", var.vpc_link)
 
   depends_on = [aws_api_gateway_resource.parent_id]
 }
