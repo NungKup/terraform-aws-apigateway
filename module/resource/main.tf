@@ -120,7 +120,7 @@ module "medthod_parent" {
   integration_cache_key_parameters = lookup(each.value, "integration_cache_key_parameters", [])
   integration_cache_namespace      = lookup(each.value, "integration_cache_namespace", aws_api_gateway_resource.parent_id[each.key].id)
   integration_content_handling     = lookup(each.value, "integration_content_handling", null)
-  integration_timeout_milliseconds = lookup(each.value, "integration_timeout_milliseconds", 9000)
+  integration_timeout_milliseconds = lookup(each.value, "integration_timeout_milliseconds", null)
 
   status_code                = lookup(each.value, "status_code", null)
   method_response_models     = lookup(each.value, "method_response_models", {})
