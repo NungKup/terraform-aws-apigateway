@@ -44,3 +44,22 @@ resource "aws_api_gateway_stage" "default" {
   }
   depends_on = [aws_api_gateway_deployment.default]
 }
+
+resource "aws_api_gateway_method_settings" "click-v2" {
+  for_each = var.enable_method_setting ? var.method_setting : {}
+
+  rest_api_id = var.api_id
+  stage_name  = var.stage.stage_name
+  method_path = try(each.value.method_path, "")
+
+  settings {
+    logging_level          = "OFF"
+    metrics_enabled        = true
+    throttling_rate_limit  = "10000"
+    throttling_burst_limit = "5000"
+    caching_enabled        = false
+  }
+  depends_on = [
+    aws_api_gateway_stage.default
+  ]
+}

@@ -38,9 +38,11 @@ module "resource" {
 module "deploy_api" {
   source = "./module/deployment"
 
-  api_id = module.reat_api.api_id
-  deploy = var.deploy
-  stage  = var.stage
-
-  depends_on = [module.resource]
+  api_id                = module.reat_api.api_id
+  deploy                = var.deploy
+  stage                 = var.stage
+  enable_stage_log      = var.enable_stage_log
+  enable_method_setting = var.enable_method_setting
+  method_setting        = var.method_setting
+  depends_on            = [module.resource]
 }

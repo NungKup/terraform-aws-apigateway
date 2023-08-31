@@ -10,3 +10,10 @@ variable "api_id" {
 variable "enable_stage_log" {
   default = false
 }
+variable "enable_method_setting" {
+  default = false
+}
+
+variable "method_setting" {
+  default = {}
+}

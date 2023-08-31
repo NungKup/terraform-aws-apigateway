@@ -76,3 +76,16 @@ variable "resource_double_medthod" {
   type    = any
   default = {}
 }
+variable "enable_stage_log" {
+  type    = bool
+  default = false
+}
+variable "enable_method_setting" {
+  type    = bool
+  default = false
+}
+
+variable "method_setting" {
+  type    = any
+  default = {}
+}
