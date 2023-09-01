@@ -89,3 +89,9 @@ variable "method_setting" {
   type    = any
   default = {}
 }
+variable "api_key" {
+  default = {}
+}
+variable "enable_api_key" {
+  default = false
+}

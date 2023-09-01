@@ -35,6 +35,14 @@ module "resource" {
   depends_on = [module.reat_api]
 }
 
+# API Key
+module "api_key" {
+  source = "./module/api_key"
+
+  enable_api_key = var.enable_api_key
+  api_id         = module.reat_api.api_id
+  api_key        = var.api_key
+}
 module "deploy_api" {
   source = "./module/deployment"
 

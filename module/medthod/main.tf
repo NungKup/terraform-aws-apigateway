@@ -7,7 +7,7 @@ resource "aws_api_gateway_method" "default" {
   authorization        = var.authorization        # NONE
   authorizer_id        = var.api_authorizer_id    # null
   authorization_scopes = var.authorization_scopes #null
-  api_key_required     = var.api_key_required     # null
+  api_key_required     = var.api_key_required     # false
   request_models       = var.request_models       # { "application/json" = "Empty" })
   request_validator_id = var.request_validator_id # null
   request_parameters   = var.request_parameters   # {}
@@ -32,6 +32,7 @@ resource "aws_api_gateway_integration" "default" {
   cache_namespace         = var.integration_cache_namespace      # "") #"%{~for v in aws_api_gateway_resource.default~}${~v.id~}%{~endfor~}"
   content_handling        = var.integration_content_handling     #null)
   timeout_milliseconds    = var.integration_timeout_milliseconds #9000)
+  depends_on              = [aws_api_gateway_method.default]
 }
 
 resource "aws_api_gateway_method_response" "default" {
@@ -43,6 +44,7 @@ resource "aws_api_gateway_method_response" "default" {
   status_code         = var.status_code                #", null)              #"%{~for i, v in each.value.status_code~}${~v~}%{~if i < length(v)~}v%{~else~}200%{~endif~}%{~endfor~}" # Terraform Status 200,400,500
   response_models     = var.method_response_models     #", {})     #"%{~for i, v in each.value.method_response_models~}${~v~}%{~if i < length(v)~}v%{~else~}{}%{~endif~}%{~endfor~}"     #
   response_parameters = var.method_response_parameters #", {} #"%{~for i, v in each.value.method_response_parameters~}${~v~}%{~if i < length(v)~}v%{~else~}{}%{~endif~}%{~endfor~}" #
+  depends_on          = [aws_api_gateway_method.default, aws_api_gateway_integration.default]
 }
 
 resource "aws_api_gateway_integration_response" "default" {

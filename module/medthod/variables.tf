@@ -15,7 +15,7 @@ variable "api_authorizer_id" {
 variable "http_method" { default = "" }
 variable "authorization" { default = "NONE" }
 variable "authorization_scopes" { default = null }
-variable "api_key_required" { default = null }
+variable "api_key_required" { default = false }
 variable "request_models" { default = { "application/json" = "Empty" } }
 variable "request_validator_id" { default = null }
 variable "request_parameters" { default = {} }

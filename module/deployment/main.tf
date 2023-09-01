@@ -63,3 +63,7 @@ resource "aws_api_gateway_method_settings" "click-v2" {
     aws_api_gateway_stage.default
   ]
 }
+
+output "state_name" {
+
+}
