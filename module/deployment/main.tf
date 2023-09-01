@@ -64,6 +64,6 @@ resource "aws_api_gateway_method_settings" "click-v2" {
   ]
 }
 
-output "state_name" {
+# output "state_name" {
 
-}
+# }
