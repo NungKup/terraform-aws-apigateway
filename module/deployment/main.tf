@@ -45,7 +45,7 @@ resource "aws_api_gateway_stage" "default" {
   depends_on = [aws_api_gateway_deployment.default]
 }
 
-resource "aws_api_gateway_method_settings" "click-v2" {
+resource "aws_api_gateway_method_settings" "default" {
   for_each = var.enable_method_setting ? var.method_setting : {}
 
   rest_api_id = var.api_id
