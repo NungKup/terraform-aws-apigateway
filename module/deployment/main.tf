@@ -83,7 +83,7 @@ resource "aws_api_gateway_base_path_mapping" "default" {
   api_id      = var.api_id
   stage_name  = try(each.value.stage_name, "")
   domain_name = aws_api_gateway_domain_name.default[each.key].domain_name
-  base_path   = try(each.value.stage_name, "") #var.stage_name == "prod" || var.stage_name == "production" ? "" : var.stage_name
+  base_path   = each.value.stage_name == "production" ? "" : try(each.value.stage_name, "") #var.stage_name == "prod" || var.stage_name == "production" ? "" : var.stage_name
 }
 
 
