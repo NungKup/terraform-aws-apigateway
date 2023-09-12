@@ -49,7 +49,7 @@ resource "aws_api_gateway_method_settings" "click-v2" {
   for_each = var.enable_method_setting ? var.method_setting : {}
 
   rest_api_id = var.api_id
-  stage_name  = var.stage.stage_name
+  stage_name  = try(each.value.stage_name, "")
   method_path = try(each.value.method_path, "")
 
   settings {
