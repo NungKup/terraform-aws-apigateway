@@ -17,3 +17,9 @@ variable "enable_method_setting" {
 variable "method_setting" {
   default = {}
 }
+variable "enable_domain_name" {
+  default = false
+}
+variable "domain_name" {
+  default = {}
+}

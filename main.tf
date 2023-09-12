@@ -50,6 +50,8 @@ module "deploy_api" {
   deploy                = var.deploy
   stage                 = var.stage
   enable_stage_log      = var.enable_stage_log
+  enable_domain_name    = var.enable_domain_name
+  domain_name           = var.domain_name
   enable_method_setting = var.enable_method_setting
   method_setting        = var.method_setting
   depends_on            = [module.resource]

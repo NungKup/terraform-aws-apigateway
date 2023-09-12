@@ -64,6 +64,29 @@ resource "aws_api_gateway_method_settings" "click-v2" {
   ]
 }
 
+resource "aws_api_gateway_domain_name" "default" {
+  for_each = var.enable_domain_name ? var.domain_name : {}
+
+  domain_name              = try(each.value.domain_name, "")
+  regional_certificate_arn = try(each.value.regional_certificate_arn, "")
+
+  endpoint_configuration {
+    types = [
+      "REGIONAL",
+    ]
+  }
+}
+
+resource "aws_api_gateway_base_path_mapping" "default" {
+  for_each = var.enable_domain_name ? var.domain_name : {}
+
+  api_id      = var.api_id
+  stage_name  = try(each.value.stage_name, "")
+  domain_name = aws_api_gateway_domain_name.default[each.key].domain_name
+  base_path   = try(each.value.stage_name, "") #var.stage_name == "prod" || var.stage_name == "production" ? "" : var.stage_name
+}
+
+
 # output "state_name" {
 
 # }

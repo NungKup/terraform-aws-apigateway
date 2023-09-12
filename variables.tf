@@ -95,3 +95,9 @@ variable "api_key" {
 variable "enable_api_key" {
   default = false
 }
+variable "enable_domain_name" {
+  default = false
+}
+variable "domain_name" {
+  default = {}
+}
