@@ -8,10 +8,10 @@ module "reat_api" {
   enable_private_api       = var.enable_private_api
   endpoint_configuration   = var.endpoint_configuration
   vpc_id                   = var.vpc_id
-
-  vpc_link_name        = var.vpc_link_name
-  vpc_link_description = var.vpc_link_description
-  nlb_target_arn       = var.nlb_target_arn
+  enable_vpc_link          = var.enable_vpc_link
+  vpc_link_name            = var.vpc_link_name
+  vpc_link_description     = var.vpc_link_description
+  nlb_target_arn           = var.nlb_target_arn
 }
 
 module "resource" {
