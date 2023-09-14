@@ -32,7 +32,8 @@ variable "vpc_id" {
   type = string
 }
 variable "vpc_link_name" {
-  type = string
+  type    = string
+  default = ""
 }
 variable "vpc_link_description" {
   type    = string
