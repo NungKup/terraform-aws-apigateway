@@ -2,10 +2,6 @@ variable "enable_private_api" {
   type    = bool
   default = true
 }
-variable "enable_vpc_link" {
-  type    = bool
-  default = true
-}
 variable "nlb_target_arn" {
   type    = list(string)
   default = []
