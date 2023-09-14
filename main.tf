@@ -27,7 +27,7 @@ module "resource" {
   enable_create_double_medthod = var.enable_create_double_medthod
   resource_double_medthod      = var.resource_double_medthod
 
-  vpc_link = module.reat_api.api_vpc_link[0]
+  vpc_link = var.enable_vpc_link ? module.reat_api.api_vpc_link[0] : ""
 
   # request_config  = try(each.value.request_config, {})
   # response_config = try(each.value.response_config, {})
