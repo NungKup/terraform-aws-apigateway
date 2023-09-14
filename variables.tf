@@ -8,7 +8,7 @@ variable "enable_vpc_link" {
 }
 variable "nlb_target_arn" {
   type    = list(string)
-  default = null
+  default = []
 }
 variable "name" {
   type = string
