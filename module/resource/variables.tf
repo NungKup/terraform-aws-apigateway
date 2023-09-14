@@ -28,7 +28,7 @@ variable "enable_resource" {
 }
 variable "vpc_link" {
   type    = string
-  default = null
+  default = ""
 }
 variable "model_config" {
   type    = any
