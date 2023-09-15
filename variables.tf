@@ -90,3 +90,6 @@ variable "enable_domain_name" {
 variable "domain_name" {
   default = {}
 }
+variable "config_vpc_link" {
+  default = {}
+}
