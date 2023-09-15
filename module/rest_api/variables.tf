@@ -2,14 +2,14 @@ variable "enable_private_api" {
   type    = bool
   default = true
 }
-variable "enable_vpc_link" {
-  type    = bool
-  default = true
-}
-variable "nlb_target_arn" {
-  type    = list(string)
-  default = []
-}
+# variable "enable_vpc_link" {
+#   type    = bool
+#   default = true
+# }
+# variable "nlb_target_arn" {
+#   type    = list(string)
+#   default = []
+# }
 variable "name" {
   type = string
 }
@@ -31,11 +31,11 @@ variable "endpoint_configuration" {
 variable "vpc_id" {
   type = string
 }
-variable "vpc_link_name" {
-  type    = string
-  default = ""
-}
-variable "vpc_link_description" {
-  type    = string
-  default = null
-}
+# variable "vpc_link_name" {
+#   type    = string
+#   default = ""
+# # }
+# variable "vpc_link_description" {
+#   type    = string
+#   default = null
+# }

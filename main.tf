@@ -8,12 +8,18 @@ module "reat_api" {
   enable_private_api       = var.enable_private_api
   endpoint_configuration   = var.endpoint_configuration
   vpc_id                   = var.vpc_id
-  enable_vpc_link          = var.enable_vpc_link
-  vpc_link_name            = var.vpc_link_name
-  vpc_link_description     = var.vpc_link_description
-  nlb_target_arn           = var.nlb_target_arn
+
 }
 
+module "vpclink" {
+  source = "./module/vpc_link"
+
+  enable_vpc_link = var.enable_vpc_link
+  config_vpc_link = var.config_vpc_link
+  # vpc_link_name        = var.vpc_link_name
+  # vpc_link_description = var.vpc_link_description
+  # nlb_target_arn       = var.nlb_target_arn
+}
 module "resource" {
   source = "./module/resource"
 
@@ -27,7 +33,7 @@ module "resource" {
   enable_create_double_medthod = var.enable_create_double_medthod
   resource_double_medthod      = var.resource_double_medthod
 
-  vpc_link = var.enable_vpc_link ? module.reat_api.api_vpc_link[0] : ""
+  vpc_link = var.enable_vpc_link ? module.vpclink.api_vpc_link[0] : ""
 
   # request_config  = try(each.value.request_config, {})
   # response_config = try(each.value.response_config, {})
@@ -43,6 +49,7 @@ module "api_key" {
   api_id         = module.reat_api.api_id
   api_key        = var.api_key
 }
+
 module "deploy_api" {
   source = "./module/deployment"
 
