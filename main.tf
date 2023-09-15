@@ -14,6 +14,8 @@ module "reat_api" {
 module "vpclink" {
   source = "./module/vpc_link"
 
+  count = var.enable_vpc_link ? 1 : 0
+
   enable_vpc_link = var.enable_vpc_link
   config_vpc_link = var.config_vpc_link
   # vpc_link_name        = var.vpc_link_name
