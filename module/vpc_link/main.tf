@@ -1,5 +1,5 @@
 resource "aws_api_gateway_vpc_link" "default" {
-  for_each = var.enable_vpc_link ? var.config_vpc_link : 0
+  for_each = var.enable_vpc_link ? var.config_vpc_link : {}
 
   name        = try(each.value.name, "vpclink")
   description = try(each.value.description, "")
