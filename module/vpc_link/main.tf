@@ -9,7 +9,7 @@ resource "aws_api_gateway_vpc_link" "default" {
 
 
 output "api_vpc_link" {
-  value = aws_api_gateway_vpc_link.default[*].id
+  value = try(aws_api_gateway_vpc_link.default[*].id, "")
 }
 
 variable "enable_vpc_link" {
