@@ -14,14 +14,16 @@ module "reat_api" {
 module "vpclink" {
   source = "./module/vpc_link"
 
-  count = var.enable_vpc_link ? 1 : 0
-
   enable_vpc_link = var.enable_vpc_link
   config_vpc_link = var.config_vpc_link
   # vpc_link_name        = var.vpc_link_name
   # vpc_link_description = var.vpc_link_description
   # nlb_target_arn       = var.nlb_target_arn
 }
+locals {
+  vpc_link = keys(var.config_vpc_link)
+}
+
 module "resource" {
   source = "./module/resource"
 
@@ -35,7 +37,7 @@ module "resource" {
   enable_create_double_medthod = var.enable_create_double_medthod
   resource_double_medthod      = var.resource_double_medthod
 
-  vpc_link = var.enable_vpc_link ? module.vpclink[0].api_vpc_link : ""
+  vpc_link = var.enable_vpc_link ? module.vpclink.api_vpc_link[local.vpc_link[0]] : ""
 
   # request_config  = try(each.value.request_config, {})
   # response_config = try(each.value.response_config, {})
