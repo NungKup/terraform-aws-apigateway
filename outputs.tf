@@ -8,7 +8,7 @@ output "api_arn" {
   value = module.reat_api.api_arn
 }
 output "api_vpc_link" {
-  value = module.vpclink[0].api_vpc_link
+  value = module.vpclink.api_vpc_link
 }
 
 output "api_resource_id" {
